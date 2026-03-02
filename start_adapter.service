@@ -1,0 +1,22 @@
+sudo bash -c 'cat > /etc/systemd/system/start_adapter.service << "EOF"
+[Unit]
+Description=Start Robot Adapter
+After=network-online.target cleanup-roslog.service
+Wants=network-online.target
+Requires=cleanup-roslog.service
+
+[Service]
+Type=simple
+User=nrc
+WorkingDirectory=/home/nrc/server/Robot-Control_System
+
+ExecStart=/bin/bash -lc "/home/nrc/server/Robot-Control_System/scripts/start_adapter.sh -conf /home/nrc/server/Robot-Control_System/config/sim.yaml"
+
+Restart=always
+RestartSec=5
+KillSignal=SIGINT
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target
+EOF'

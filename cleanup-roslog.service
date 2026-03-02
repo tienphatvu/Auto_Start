@@ -1,0 +1,12 @@
+[Unit]
+Description=Cleanup ROS logs at boot
+After=local-fs.target
+Before=start_fleet.service start_adapter.service
+
+[Service]
+Type=oneshot
+User=nrc
+ExecStart=/bin/bash -c 'if [ -d /home/nrc/.ros/log ]; then rm -rf /home/nrc/.ros/log; fi'
+
+[Install]
+WantedBy=multi-user.target

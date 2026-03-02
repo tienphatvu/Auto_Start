@@ -1,0 +1,24 @@
+sudo bash -c 'cat > /etc/systemd/system/start_fleet.service << EOF
+[Unit]
+Description=Start NRC Fleet (ROS2)
+After=network-online.target cleanup-roslog.service
+Wants=network-online.target
+Requires=cleanup-roslog.service
+
+[Service]
+Type=simple
+User=nrc
+WorkingDirectory=/home/nrc/server/NRC-Fleet
+
+ExecStart=/bin/bash -lc "source /opt/ros/humble/setup.bash && \
+source /home/nrc/server/NRC-Fleet/install/setup.bash && \
+ros2 launch scripts fleet.launch.py"
+
+Restart=always
+RestartSec=5
+KillSignal=SIGINT
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target
+EOF'
