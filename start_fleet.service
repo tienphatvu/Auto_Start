@@ -12,7 +12,7 @@ WorkingDirectory=/home/nrc/server/NRC-Fleet
 
 ExecStart=/bin/bash -lc "source /opt/ros/humble/setup.bash && \
 source /home/nrc/server/NRC-Fleet/install/setup.bash && \
-ros2 launch scripts fleet.launch.py"
+ros2 launch scripts fleet.launch.py 2>&1 | tê fleet.log"
 
 Restart=always
 RestartSec=5
