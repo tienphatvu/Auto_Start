@@ -10,7 +10,7 @@ Type=simple
 User=nrc
 WorkingDirectory=/home/nrc/server/Robot-Control_System
 
-ExecStart=/bin/bash -lc "/home/nrc/server/Robot-Control_System/scripts/start_adapter.sh -conf /home/nrc/server/Robot-Control_System/config/sim.yaml"
+ExecStart=/bin/bash -lc "/home/nrc/server/Robot-Control_System/scripts/start_adapter.sh -conf /home/nrc/server/Robot-Control_System/config/hik_slam_f3.yaml"
 
 Restart=always
 RestartSec=5
